@@ -1,0 +1,27 @@
+﻿@model ChatAura.Models.LoginViewModel
+@using Microsoft.AspNet.Mvc
+
+@{
+    ViewBag.Title = "Login";
+}
+
+<h2>Login</h2>
+
+@using (Html.BeginForm("Login", "Account", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <div>
+        @Html.LabelFor(m => m.Email)
+        @Html.EditorFor(m => m.Email)
+        @Html.ValidationMessageFor(m => m.Email)
+    </div>
+
+    <div>
+        @Html.LabelFor(m => m.Password)
+        @Html.EditorFor(m => m.Password)
+        @Html.ValidationMessageFor(m => m.Password)
+    </div>
+
+    <button type="submit">Login</button>
+}

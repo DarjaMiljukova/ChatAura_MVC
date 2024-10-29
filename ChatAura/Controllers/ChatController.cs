@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web.Mvc;
 using ChatAura.Models;
+using Microsoft.AspNet.Identity;
 
 namespace ChatAura.Controllers
 {
@@ -60,22 +62,22 @@ namespace ChatAura.Controllers
 
         // POST: Chat/SendMessage
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult SendMessage(int roomId, string content)
+        [Authorize] // Убедитесь, что только авторизованные пользователи могут отправлять сообщения
+        public async Task<ActionResult> SendMessage(int roomId, string content)
         {
-            if (!string.IsNullOrEmpty(content))
+            var userId = User.Identity.GetUserId(); // Получите идентификатор текущего пользователя
+            var message = new Message
             {
-                var message = new Message
-                {
-                    RoomId = roomId,
-                    Content = content,
-                    Timestamp = DateTime.Now
-                };
+                Content = content,
+                Timestamp = DateTime.Now,
+                UserId = userId,
+                RoomId = roomId // Предполагается, что у вас есть ChatRoomId в сообщении
+            };
 
-                db.Messages.Add(message);
-                db.SaveChanges();
-            }
-            return RedirectToAction("Room", new { id = roomId });
+            db.Messages.Add(message);
+            await db.SaveChangesAsync(); // Сохраняем изменения в базе данных
+
+            return RedirectToAction("ChatRoom", new { id = roomId });
         }
     }
 }
