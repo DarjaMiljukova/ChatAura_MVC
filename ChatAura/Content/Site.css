@@ -107,7 +107,7 @@ h2 {
     padding: 10px;
     border-radius: 10px;
     position: relative;
-    max-width: 75%; /* Увеличиваем ширину сообщения */
+    max-width: 75%;
 }
 
 .user {
@@ -128,7 +128,7 @@ h2 {
     position: absolute;
     bottom: 5px;
     right: 10px;
-    white-space: nowrap; /* Запретить перенос времени на новую строку */
+    white-space: nowrap;
 }
 
 .message-input {
