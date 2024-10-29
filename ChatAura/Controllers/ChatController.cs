@@ -38,7 +38,7 @@ namespace ChatAura.Controllers
                 }
                 catch (DbUpdateException ex)
                 {
-                    ModelState.AddModelError("", "Ошибка при сохранении данных: " + ex.InnerException?.Message);
+                    ModelState.AddModelError("", "Error while saving data: " + ex.InnerException?.Message);
                 }
             }
             return View(room);
@@ -47,16 +47,30 @@ namespace ChatAura.Controllers
         // GET: Chat/Room/{id}
         public ActionResult Room(int? id)
         {
+            if (id == null) return RedirectToAction("Index");
+
             var room = db.ChatRooms.Find(id);
             if (room == null)
             {
                 return RedirectToAction("Index");
             }
 
-            var messages = db.Messages.Where(m => m.RoomId == id).ToList();
+            var userId = Session["UserId"]?.ToString();
+            if (userId == null) return RedirectToAction("Index");
+
+            if (!int.TryParse(userId, out int parsedUserId))
+            {
+                return RedirectToAction("Index");
+            }
+
+            var messages = db.Messages
+                .Where(m => m.RoomId == room.Id)
+                .ToList();
+
             ViewBag.Messages = messages;
             return View(room);
         }
+
 
         // POST: Chat/SendMessage
         [HttpPost]
@@ -65,15 +79,21 @@ namespace ChatAura.Controllers
         {
             if (!string.IsNullOrEmpty(content))
             {
-                var message = new Message
+                var userId = Session["UserId"]?.ToString();
+                if (userId != null && int.TryParse(userId, out int parsedUserId))
                 {
-                    RoomId = roomId,
-                    Content = content,
-                    Timestamp = DateTime.Now
-                };
+                    var user = db.Users.Find(parsedUserId);
+                    var message = new Message
+                    {
+                        RoomId = roomId,
+                        Content = content,
+                        Timestamp = DateTime.Now,
+                        PhoneNumber = user?.PhoneNumber
+                    };
 
-                db.Messages.Add(message);
-                db.SaveChanges();
+                    db.Messages.Add(message);
+                    db.SaveChanges();
+                }
             }
             return RedirectToAction("Room", new { id = roomId });
         }

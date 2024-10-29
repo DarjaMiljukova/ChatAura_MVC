@@ -5,10 +5,10 @@ namespace ChatAura.Models
     public class ApplicationUser
     {
         public int Id { get; set; }
-        [Required(ErrorMessage = "Введите номер телефона")]
+        [Required(ErrorMessage = "Enter your Phonenumber")]
         public string PhoneNumber { get; set; }
 
-        [Required(ErrorMessage = "Введите пароль")]
+        [Required(ErrorMessage = "Enter your password")]
         [DataType(DataType.Password)]
         public string Password { get; set; }
     }

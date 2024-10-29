@@ -1,0 +1,21 @@
+﻿@{
+    ViewBag.Title = "Method choose";
+}
+
+<div class="container method-choose center">
+    <h2 class="title">Choose method</h2>
+
+    <div class="method-option">
+        <h3 class="subtitle">Register</h3>
+        <p>
+            <a href="@Url.Action("Register", "Account")" class="button">Register</a>
+        </p>
+    </div>
+
+    <div class="method-option center">
+        <h3 class="subtitle">Login</h3>
+        <p>
+            <a href="@Url.Action("Login", "Account")" class="button">Login</a>
+        </p>
+    </div>
+</div>

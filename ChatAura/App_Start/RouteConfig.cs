@@ -12,7 +12,7 @@ namespace ChatAura
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Account", action = "Register", id = UrlParameter.Optional },
+                defaults: new { controller = "Account", action = "LoginChoice", id = UrlParameter.Optional },
                 namespaces: new[] { "ChatAura.Controllers" } // Убедитесь, что пространство имён соответствует вашему
             );
         }

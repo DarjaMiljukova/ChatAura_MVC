@@ -1,20 +1,150 @@
-﻿/* Set padding to keep content from hitting the edges */
-.body-content {
-    margin-top: 15px;
-    padding-left: 15px;
-    padding-right: 15px;
+﻿body {
+    background-color: #1e1e2f;
+    color: #ffffff;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
 }
 
-/* Override the default bootstrap behavior where horizontal description lists 
-   will truncate terms that are too long to fit in the left column 
-*/
-.dl-horizontal dt {
-    white-space: normal;
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
 }
 
-/* Set width on the form input elements since they're 100% wide by default */
-input,
-select,
-textarea {
-    max-width: 280px;
+h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+    .table th, .table td {
+        border: 1px solid #444;
+        padding: 10px;
+        text-align: left;
+    }
+
+    .table th {
+        background-color: #282a36;
+    }
+
+    .table tr:hover {
+        background-color: #44475a;
+    }
+
+.button {
+    display: inline-block;
+    background-color: #6272a4;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    text-align: center;
+    margin-top: 10px;
+}
+
+    .button:hover {
+            background-color: #4e5460;
+    }
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-control {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #444;
+    border-radius: 5px;
+    background-color: #282a36;
+    color: #ffffff;
+}
+
+.text-danger {
+    color: #ff5555;
+}
+
+.login-container, .registration, .create-room {
+    background-color: #2a2a2f;
+    padding: 20px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+    .login-container h2, .registration h2, .create-room h2 {
+        margin: 0;
+        text-align: center;
+    }
+.chat-room {
+    background-color: #2b2b35;
+    border-radius: 8px;
+    padding: 20px;
+    margin-top: 20px;
+}
+
+.messages {
+    max-height: 400px;
+    overflow-y: auto;
+    border: 1px solid #444;
+    border-radius: 5px;
+    background-color: #282a36;
+    padding: 10px;
+    margin-bottom: 15px;
+}
+
+.messages-list {
+    display: flex;
+    flex-direction: column;
+}
+
+.message {
+    margin: 5px 0;
+    padding: 10px;
+    border-radius: 10px;
+    position: relative;
+    max-width: 75%; /* Увеличиваем ширину сообщения */
+}
+
+.user {
+    background-color: #3d6e9b;
+    color: white;
+    align-self: flex-end;
+}
+
+.other {
+    background-color: #44475a;
+    color: white;
+    align-self: flex-start;
+}
+
+.timestamp {
+    font-size: 0.8em;
+    color: #a1a1a1;
+    position: absolute;
+    bottom: 5px;
+    right: 10px;
+    white-space: nowrap; /* Запретить перенос времени на новую строку */
+}
+
+.message-input {
+    border-radius: 5px;
+    resize: none;
+    width: 97%;
+}
+
+.send-button {
+    width: 100%;
+    margin-top: 10px;
+}
+.center{
+    text-align: center;
+}
+
+.width95{
+    width: 95%;
 }

@@ -1,15 +1,17 @@
 ﻿@model ChatAura.Models.ChatRoom
 
-<h2>Create Room</h2>
+<div class="container create-room">
+    <h2>Create Room</h2>
 
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
-    <div class="form-group">
-        @Html.LabelFor(model => model.Name)
-        @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
-        @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
-    </div>
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        <div class="form-group">
+            @Html.LabelFor(model => model.Name)
+            @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+        </div>
 
-    <button type="submit" class="btn btn-primary">Create</button>
-}
+        <button type="submit" class="button">Create</button>
+    }
+</div>

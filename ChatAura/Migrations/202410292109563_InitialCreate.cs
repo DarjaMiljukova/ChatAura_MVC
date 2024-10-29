@@ -24,6 +24,7 @@
                         RoomId = c.Int(nullable: false),
                         Content = c.String(nullable: false),
                         Timestamp = c.DateTime(nullable: false),
+                        PhoneNumber = c.String(),
                         ChatRoom_Id = c.Int(),
                     })
                 .PrimaryKey(t => t.Id)

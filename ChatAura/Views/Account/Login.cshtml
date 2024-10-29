@@ -1,22 +1,26 @@
 ﻿@model ChatAura.Models.ApplicationUser
 
-<h2>Вход</h2>
+<div class="login-container">
+    <h2>Login</h2>
 
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
 
-    <div>
-        @Html.LabelFor(m => m.PhoneNumber)
-        @Html.TextBoxFor(m => m.PhoneNumber)
-        @Html.ValidationMessageFor(m => m.PhoneNumber)
-    </div>
+        <div class="form-group width95">
+            @Html.LabelFor(m => m.PhoneNumber)
+            <br />
+            @Html.TextBoxFor(m => m.PhoneNumber, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.PhoneNumber, "", new { @class = "text-danger" })
+        </div>
 
-    <div>
-        @Html.LabelFor(m => m.Password)
-        @Html.PasswordFor(m => m.Password)
-        @Html.ValidationMessageFor(m => m.Password)
-    </div>
+        <div class="form-group width95">
+            @Html.LabelFor(m => m.Password)
+            <br />
+            @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+        </div>
 
-    <button type="submit">Войти</button>
-}   
+        <button type="submit" class="button">Login</button>
+    }
+</div>

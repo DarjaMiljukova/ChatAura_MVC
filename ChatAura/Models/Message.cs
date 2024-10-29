@@ -10,12 +10,12 @@ namespace ChatAura.Models
         [Required]
         public int RoomId { get; set; }
 
-        [Required(ErrorMessage = "Содержимое сообщения обязательно для заполнения.")]
+        [Required(ErrorMessage = "The content of the message is required.")]
         public string Content { get; set; }
 
         public DateTime Timestamp { get; set; }
+        public string PhoneNumber { get; set; }
 
-        // Навигационное свойство
         public virtual ChatRoom ChatRoom { get; set; }
     }
 }

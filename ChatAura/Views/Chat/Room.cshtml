@@ -1,25 +1,34 @@
 ﻿@model ChatAura.Models.ChatRoom
-@model ChatAura.Models.ApplicationUser
 
-<h2>@Model.Name</h2>
+<div class="container chat-room">
+    <h2>@Model.Name</h2>
 
-<div>
-    <h4>Messages</h4>
-    <div>
-        @foreach (var message in ViewBag.Messages)
-        {
-            <p><strong>@message.PhoneNumber, @message.Timestamp:</strong> @message.Content</p>
-        }
+    <div class="messages">
+        <h4>Messages</h4>
+        <div class="messages-list">
+            @foreach (ChatAura.Models.Message message in ViewBag.Messages)
+            {
+                <div class="message @(message.PhoneNumber == ViewBag.PhoneNumber ? "user" : "other")">
+                    <strong>@message.PhoneNumber :</strong>
+                    <div class="content">@message.Content</div>
+                    <br />
+                    <div class="timestamp">@message.Timestamp.ToString("HH:mm")</div>
+                </div>
+            }
+        </div>
+    </div>
+
+    @using (Html.BeginForm("SendMessage", "Chat", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        @Html.Hidden("roomId", Model.Id)
+        <div class="form-group">
+            @Html.TextArea("content", null, new { @class = "form-control message-input", placeholder = "Enter a message..." })
+        </div>
+        <button type="submit" class="button send-button">Send</button>
+    }
+    <br />
+    <div class="back-button center">
+        @Html.ActionLink("Back to room list", "Index", "Chat", null, new { @class = "button back-button" })
     </div>
 </div>
-
-@using (Html.BeginForm("SendMessage", "Chat", FormMethod.Post))
-{
-    @Html.AntiForgeryToken() <!-- Добавлено для защиты от CSRF -->
-
-    @Html.Hidden("roomId", Model.Id)
-    <div class="form-group">
-        @Html.TextArea("content", null, new { @class = "form-control", rows = 3 })
-    </div>
-    <button type="submit" class="btn btn-primary">Send</button>
-}

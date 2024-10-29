@@ -538,9 +538,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202410291927241_InitialCreate.cs" />
-    <Compile Include="Migrations\202410291927241_InitialCreate.Designer.cs">
-      <DependentUpon>202410291927241_InitialCreate.cs</DependentUpon>
+    <Compile Include="Migrations\202410292109563_InitialCreate.cs" />
+    <Compile Include="Migrations\202410292109563_InitialCreate.Designer.cs">
+      <DependentUpon>202410292109563_InitialCreate.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApplicationUser.cs" />
@@ -608,6 +608,8 @@
     <Content Include="Views\Account\Verify.cshtml" />
     <Content Include="Views\Account\Index.cshtml" />
     <Content Include="Views\Account\Register.cshtml" />
+    <Content Include="Views\Account\LoginChoice.cshtml" />
+    <Content Include="Views\Account\LoggedOut.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -646,8 +648,8 @@
     <Analyzer Include="..\packages\Microsoft.CodeAnalysis.Analyzers.1.1.0\analyzers\dotnet\cs\Microsoft.CodeAnalysis.CSharp.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202410291927241_InitialCreate.resx">
-      <DependentUpon>202410291927241_InitialCreate.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202410292109563_InitialCreate.resx">
+      <DependentUpon>202410292109563_InitialCreate.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

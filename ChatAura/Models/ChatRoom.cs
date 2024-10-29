@@ -6,8 +6,8 @@ namespace ChatAura.Models
     {
         public int Id { get; set; }
 
-        [Required(ErrorMessage = "Имя комнаты обязательно для заполнения.")]
-        [StringLength(100, ErrorMessage = "Имя комнаты не должно превышать 100 символов.")]
+        [Required(ErrorMessage = "Room name is required.")]
+        [StringLength(100, ErrorMessage = "The room name must not exceed 100 characters.")]
         public string Name { get; set; }
 
     }

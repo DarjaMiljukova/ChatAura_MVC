@@ -1,5 +1,4 @@
 ﻿using ChatAura.Models;
-using System;
 using System.Linq;
 using System.Web.Mvc;
 
@@ -7,6 +6,19 @@ namespace ChatAura.Controllers
 {
     public class AccountController : Controller
     {
+        private readonly ChatAuraDbContext _db;
+
+        public AccountController()
+        {
+            _db = new ChatAuraDbContext();
+        }
+
+        // GET: Account/LoginChoice
+        public ActionResult LoginChoice()
+        {
+            return View();
+        }
+
         // GET: Account/Register
         public ActionResult Register()
         {
@@ -19,14 +31,18 @@ namespace ChatAura.Controllers
         {
             if (ModelState.IsValid)
             {
-                using (var db = new ChatAuraDbContext())
+                if (_db.Users.Any(u => u.PhoneNumber == model.PhoneNumber))
                 {
-                    // Сохраните пользователя в базе данных
-                    db.Users.Add(model);
-                    db.SaveChanges();
+                    ModelState.AddModelError("PhoneNumber", "This Phonenumber already exists.");
+                    return View(model);
                 }
-                return RedirectToAction("Login"); // Перенаправление на страницу входа после успешной регистрации
+
+                _db.Users.Add(model);
+                _db.SaveChanges();
+
+                return RedirectToAction("Login");
             }
+
             return View(model);
         }
 
@@ -42,23 +58,36 @@ namespace ChatAura.Controllers
         {
             if (ModelState.IsValid)
             {
-                using (var db = new ChatAuraDbContext())
+                var user = _db.Users.FirstOrDefault(u => u.PhoneNumber == model.PhoneNumber);
+                if (user != null)
                 {
-                    // Проверка пользователя по номеру телефона
-                    var user = db.Users.FirstOrDefault(u => u.PhoneNumber == model.PhoneNumber);
-                    if (user != null)
-                    {
-                        // Успешный вход
-                        // Здесь можно установить куки, сессии и т.д.
-                        Session["UserId"] = user.Id; // Сохранение ID пользователя в сессии
+                    Session["UserId"] = user.Id;
 
-                        // Переход к странице с комнатами
-                        return RedirectToAction("Room", "Chat"); // Изменено на "Room"
-                    }
+                    return RedirectToAction("Room", "Chat");
                 }
             }
-            ModelState.AddModelError("", "Неверный номер телефона или пароль.");
+            ModelState.AddModelError("", "Incorrect Phonenumber or Password.");
             return View(model);
+        }
+
+        public ActionResult Logout()
+        {
+            Session.Clear();
+            return RedirectToAction("LoggedOut");
+        }
+
+        public ActionResult LoggedOut()
+        {
+            return View();
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                _db.Dispose();
+            }
+            base.Dispose(disposing);
         }
     }
 }
