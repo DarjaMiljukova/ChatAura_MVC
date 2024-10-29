@@ -1,0 +1,24 @@
+﻿@model ChatAura.Models.ChatRoom
+
+<h2>@Model.Name</h2>
+
+<div>
+    <h4>Messages</h4>
+    <div>
+        @foreach (var message in ViewBag.Messages)
+        {
+            <p><strong>@message.Timestamp:</strong> @message.Content</p>
+        }
+    </div>
+</div>
+
+@using (Html.BeginForm("SendMessage", "Chat", FormMethod.Post))
+{
+    @Html.AntiForgeryToken() <!-- Добавлено для защиты от CSRF -->
+
+    @Html.Hidden("roomId", Model.Id)
+    <div class="form-group">
+        @Html.TextArea("content", null, new { @class = "form-control", rows = 3 })
+    </div>
+    <button type="submit" class="btn btn-primary">Send</button>
+}
