@@ -1,4 +1,5 @@
 ﻿@model ChatAura.Models.ChatRoom
+@model ChatAura.Models.ApplicationUser
 
 <h2>@Model.Name</h2>
 
@@ -7,7 +8,7 @@
     <div>
         @foreach (var message in ViewBag.Messages)
         {
-            <p><strong>@message.Timestamp:</strong> @message.Content</p>
+            <p><strong>@message.PhoneNumber, @message.Timestamp:</strong> @message.Content</p>
         }
     </div>
 </div>

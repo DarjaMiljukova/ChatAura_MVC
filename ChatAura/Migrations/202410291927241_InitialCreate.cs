@@ -30,12 +30,23 @@
                 .ForeignKey("dbo.ChatRooms", t => t.ChatRoom_Id)
                 .Index(t => t.ChatRoom_Id);
             
+            CreateTable(
+                "dbo.ApplicationUsers",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        PhoneNumber = c.String(nullable: false),
+                        Password = c.String(nullable: false),
+                    })
+                .PrimaryKey(t => t.Id);
+            
         }
         
         public override void Down()
         {
             DropForeignKey("dbo.Messages", "ChatRoom_Id", "dbo.ChatRooms");
             DropIndex("dbo.Messages", new[] { "ChatRoom_Id" });
+            DropTable("dbo.ApplicationUsers");
             DropTable("dbo.Messages");
             DropTable("dbo.ChatRooms");
         }

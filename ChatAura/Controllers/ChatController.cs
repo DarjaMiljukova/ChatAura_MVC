@@ -45,12 +45,12 @@ namespace ChatAura.Controllers
         }
 
         // GET: Chat/Room/{id}
-        public ActionResult Room(int id)
+        public ActionResult Room(int? id)
         {
             var room = db.ChatRooms.Find(id);
             if (room == null)
             {
-                return HttpNotFound();
+                return RedirectToAction("Index");
             }
 
             var messages = db.Messages.Where(m => m.RoomId == id).ToList();

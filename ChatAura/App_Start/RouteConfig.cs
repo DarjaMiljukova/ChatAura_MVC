@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using System.Web.Routing;
 
 namespace ChatAura
 {
-    public class RouteConfig
+    public static class RouteConfig // Добавлено "class"
     {
         public static void RegisterRoutes(RouteCollection routes)
         {
@@ -16,7 +12,8 @@ namespace ChatAura
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Chat", action = "Index", id = UrlParameter.Optional }
+                defaults: new { controller = "Account", action = "Register", id = UrlParameter.Optional },
+                namespaces: new[] { "ChatAura.Controllers" } // Убедитесь, что пространство имён соответствует вашему
             );
         }
     }

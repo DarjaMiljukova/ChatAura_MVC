@@ -1,0 +1,27 @@
+﻿@model IEnumerable<ChatAura.Models.ChatRoom>
+
+<h2>Chat Rooms</h2>
+
+<p>
+    @Html.ActionLink("Create New Room", "CreateRoom")
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Room Name</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var room in Model)
+        {
+            <tr>
+                <td>@room.Name</td>
+                <td>
+                    @Html.ActionLink("Enter", "Room", new { id = room.Id })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

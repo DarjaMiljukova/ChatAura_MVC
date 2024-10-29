@@ -13,7 +13,7 @@ namespace ChatAura.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "202410291628573_InitialCreate"; }
+            get { return "202410291927241_InitialCreate"; }
         }
         
         string IMigrationMetadata.Source
